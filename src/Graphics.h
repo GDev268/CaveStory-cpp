@@ -1,12 +1,11 @@
 #include <SDL.h>
 #include <string>
 
-class Window {
+class Graphics {
 public:
-	Window();
-	~Window();
+	Graphics();
+	~Graphics();
 private:
-
     SDL_Window* _window;
     SDL_Renderer* _renderer;
 };

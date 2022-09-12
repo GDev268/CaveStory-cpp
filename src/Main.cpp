@@ -4,13 +4,10 @@ and may not be redistributed without written permission.*/
 //Using SDL and standard IO
 #include <SDL.h>
 #include <stdio.h>
-#include "Window.h"
+#include "Game.h"
 
 int main(int argc, char* argv[])
 {
-	Window window;
-	while(true){
-
-	}
+	Game game;
 	return 0;
 }
