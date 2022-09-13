@@ -23,6 +23,9 @@ void Game::gameLoop(){
     Input input;
     SDL_Event event;
 
+    this->_player = Sprite(graphics,"assets/images/MyChar.png",0,0,16,16,500,500);
+    SDL_Color color = {255, 255, 255};
+
     int LAST_UPDATE_TIME = SDL_GetTicks();
     //Start the game loop
     while(true){
@@ -43,7 +46,6 @@ void Game::gameLoop(){
         if(input.wasKeyPressed(SDL_SCANCODE_ESCAPE) == true){
             return;
         }
-        
         const int CURRENT_TIME = SDL_GetTicks();
         int ELAPSED_TIME = CURRENT_TIME - LAST_UPDATE_TIME;
         /*Limit the frames by getting the minimum between the Max Framerate and the current Framerate
@@ -52,11 +54,17 @@ void Game::gameLoop(){
         */
         this->update(std::min(ELAPSED_TIME,MAX_FRAME_TIME));
         LAST_UPDATE_TIME = CURRENT_TIME;
+
+        this->draw(graphics);
     }
 }
 
 void Game::draw(Graphics &graphics){
+    graphics.clear();
 
+    this->_player.draw(graphics,100,100);
+
+    graphics.flip();
 }
 
 void Game::update(float elapsedTime){
