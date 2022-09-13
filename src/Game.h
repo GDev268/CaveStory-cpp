@@ -12,5 +12,6 @@ private:
     void update(float elapsedTime);
     
     Sprite _player;
+
 };
 

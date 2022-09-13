@@ -1,4 +1,3 @@
-//Gonna redo all the text class later :/
 #include <string>
 #include <iostream>
 #include <map>
@@ -6,26 +5,34 @@
 #include <SDL_ttf.h>
 
 #include "Sprite.h"
+#include "Graphics.h"
+
+struct Color {
+    int r;
+    int g;
+    int b;
+};
 
 class Text{
 public:
-    Text();
-    Text(SDL_Renderer* renderer,std::string pathFont,int textSize,SDL_Color color,std::string text,float posX,float posY);
+    Text(Graphics* graphics,int x,int y,int size,std::string text,std::string font,Color color);
     virtual ~Text();
 
-    void render(SDL_Renderer* renderer);
-    void update(SDL_Renderer* renderer);
-    void SetText(std::string text, SDL_Renderer* renderer);
-
+    void Create();
+    void SetText(std::string text);
+    void setFont(std::string font);
+    void SetAlpha(int alpha);
+    void destroy();
 private:
-
-    SDL_Rect* textRect = nullptr;
-    SDL_Surface* textSurface = nullptr;
-    SDL_Texture* textTexture = nullptr;
-    SDL_Color textColor;
-    TTF_Font* textFont;
-    std::string _pathFont;
-    int _textSize;
-
+    SDL_Rect* srcRect;
+    SDL_Rect* dstRect;
+    Graphics* _graphics;
+    int _x;
+    int _y;
+    int _size;
     std::string _text;
+    TTF_Font* _font;
+    SDL_Color _color;
+    SDL_Surface* _surface;
+    SDL_Texture* _texture;
 };

@@ -24,7 +24,6 @@ void Game::gameLoop(){
     SDL_Event event;
 
     this->_player = Sprite(graphics,"assets/images/MyChar.png",0,0,16,16,500,500);
-    SDL_Color color = {255, 255, 255};
 
     int LAST_UPDATE_TIME = SDL_GetTicks();
     //Start the game loop
