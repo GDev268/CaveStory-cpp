@@ -1,3 +1,4 @@
+//Gonna redo all the text class later :/
 #include <string>
 #include <iostream>
 #include <map>
@@ -6,7 +7,6 @@
 
 #include "Sprite.h"
 
-//Gonna redo all the text class later :/
 class Text{
 public:
     Text();

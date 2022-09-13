@@ -1,4 +1,5 @@
-/*#include <string>
+//Gonna redo all the text class later :/
+#include <string>
 #include <iostream>
 #include <map>
 #include <SDL_ttf.h>
@@ -54,6 +55,6 @@ void Text::SetText(std::string text, SDL_Renderer* renderer)
 {
     _text = text;
     update(renderer);
-}*/
+}
 
 
