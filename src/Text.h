@@ -15,24 +15,26 @@ struct Color {
 
 class Text{
 public:
-    Text(Graphics* graphics,int x,int y,int size,std::string text,std::string font,Color color);
+    Text();
+    Text(Graphics &graphics,int x,int y,int size,const std::string &text,const std::string &font,Color color,double alpha);
     virtual ~Text();
 
-    void Create();
+    void Create(Graphics &graphics);
     void SetText(std::string text);
     void setFont(std::string font);
-    void SetAlpha(int alpha);
+    void draw(Graphics &graphics);
+    //void SetAlpha(int alpha);
     void destroy();
-private:
-    SDL_Rect* srcRect;
-    SDL_Rect* dstRect;
-    Graphics* _graphics;
+
     int _x;
     int _y;
+    int srcw;
+    int srch;
     int _size;
+    int _alpha;
+    Color _color;
+    std::string _font;
     std::string _text;
-    TTF_Font* _font;
-    SDL_Color _color;
-    SDL_Surface* _surface;
+    Graphics _graphics;
     SDL_Texture* _texture;
 };

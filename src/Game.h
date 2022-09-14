@@ -1,6 +1,7 @@
 #include <SDL.h>
-#include "Sprite.h"
+#include "Animation.h"
 #include "Graphics.h"
+
 
 class Game{
 public:
@@ -11,7 +12,6 @@ private:
     void draw(Graphics &graphics);
     void update(float elapsedTime);
     
-    Sprite _player;
-
+    Animation _player;
 };
 
