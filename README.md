@@ -10,3 +10,6 @@
 
 ### Inspired in:
 - Remaking CaveStory in C++ (https://youtu.be/ETvApbD5xRo)
+
+## Progress so far:
+![](art/CaveStory.gif)
