@@ -27,30 +27,40 @@ void Game::gameLoop(){
 
     TTF_Init();
 
-    this->_player = Animation(graphics,"assets/images/MyChar.png",0,0,16,16,500,500,100);
-    this->_player.setupAnimations();
-    this->_player.playAnimation("RUNNING_LEFT");
+    this->_player = Player(graphics,100,100);
 
     int LAST_UPDATE_TIME = SDL_GetTicks();
     //Start the game loop
     while(true){
-        input.BeginNewFrame();
-        if(SDL_PollEvent(&event)){
-            if(event.type == SDL_KEYDOWN){
-                if(event.key.repeat == 0){
-                    input.KeyDownEvent(event);
-                }
-            }
-            else if(event.type == SDL_KEYUP){
-                input.KeyDownEvent(event);
-            }
-            else if(event.type == SDL_QUIT){
-                return;
-            }
-        }
-        if(input.wasKeyPressed(SDL_SCANCODE_ESCAPE) == true){
-            return;
-        }
+		input.BeginNewFrame();
+
+		if (SDL_PollEvent(&event)) {
+			if (event.type == SDL_KEYDOWN) {
+				if (event.key.repeat == 0) {
+					input.KeyDownEvent(event);
+				}
+			}
+			else if (event.type == SDL_KEYUP) {
+				input.KeyUpEvent(event);
+			}
+			else if (event.type == SDL_QUIT) {
+				return;
+			}
+		}
+		if (input.wasKeyPressed(SDL_SCANCODE_ESCAPE) == true) {
+			return;
+		}
+		else if (input.isKeyHeld(SDL_SCANCODE_LEFT) == true) {
+			this->_player.moveLeft();
+		}
+		else if (input.isKeyHeld(SDL_SCANCODE_RIGHT) == true) {
+			this->_player.moveRight();
+		}
+
+		if (!input.isKeyHeld(SDL_SCANCODE_LEFT) && !input.isKeyHeld(SDL_SCANCODE_RIGHT)) {
+			this->_player.stopMoving();
+		}
+
         const int CURRENT_TIME = SDL_GetTicks();
         int ELAPSED_TIME = CURRENT_TIME - LAST_UPDATE_TIME;
         //this->fpsCounter.SetText(std::to_string(std::min(ELAPSED_TIME,MAX_FRAME_TIME)));
@@ -68,7 +78,7 @@ void Game::gameLoop(){
 void Game::draw(Graphics &graphics){
     graphics.clear();
 
-    this->_player.draw(graphics,100,100);
+    this->_player.draw(graphics);
     
     graphics.flip();
 }

@@ -1,10 +1,10 @@
 
-#include "Animation.h"
+#include "AnimatedSprite.h"
 #include "Graphics.h"
 
-Animation::Animation() {}
+AnimatedSprite::AnimatedSprite() {}
 
-Animation::Animation(Graphics& graphics, const std::string &filePath, int sourceX, int sourceY,int width, int height, float posX,float posY,float timeToUpdate):
+AnimatedSprite::AnimatedSprite(Graphics& graphics, const std::string &filePath, int sourceX, int sourceY,int width, int height, float posX,float posY,float timeToUpdate):
     Sprite(graphics,filePath,sourceX,sourceY,width,height,posX,posY),
     _frameIndex(0),
     _timeToUpdate(_timeToUpdate),
@@ -15,9 +15,9 @@ Animation::Animation(Graphics& graphics, const std::string &filePath, int source
 
 }
 
-Animation::~Animation() {}
+AnimatedSprite::~AnimatedSprite() {}
 
-void Animation::addAnimation(int frames,int x,int y,std::string name,int width,int height, Vector2 offset) {
+void AnimatedSprite::addAnimation(int frames,int x,int y,std::string name,int width,int height, Vector2 offset) {
     std::vector<SDL_Rect> rectangles;
     for(int i=0; i < frames; i++) {
         SDL_Rect newRect = {(i + x) * width,y,width,height};
@@ -28,12 +28,12 @@ void Animation::addAnimation(int frames,int x,int y,std::string name,int width,i
     this->_offsets.insert(std::pair<std::string,Vector2>(name,offset));
 }
 
-void Animation::resetAnimations() {
+void AnimatedSprite::resetAnimations() {
     this->animations.clear();
     this->_offsets.clear();
 }
 
-void Animation::playAnimation(std::string animation,bool once) {
+void AnimatedSprite::playAnimation(std::string animation,bool once) {
     this->_currentAnimationOnce = once;
     
     //If the current animation is incorrect to the string start change the animation and start from the frame zero
@@ -43,16 +43,16 @@ void Animation::playAnimation(std::string animation,bool once) {
     }
 }
 
-void Animation::setVisible(bool visible) {
+void AnimatedSprite::setVisible(bool visible) {
     this->_visible = visible;
 }
 
-void Animation::stopAnimation() {
+void AnimatedSprite::stopAnimation() {
     this->_frameIndex = 0;
     animationEnd(this->_currentAnimation);
 }
 
-void Animation::update(int elapsedTime) {
+void AnimatedSprite::update(int elapsedTime) {
     Sprite::update();
 
     this->_timeElapsed = elapsedTime;
@@ -70,7 +70,7 @@ void Animation::update(int elapsedTime) {
     }
 }
 
-void Animation::draw(Graphics &graphics, int x,int y){
+void AnimatedSprite::draw(Graphics &graphics, int x,int y){
     if(_visible){
         SDL_Rect destRect;
         destRect.x = x + _offsets[this->_currentAnimation].x;
@@ -81,12 +81,4 @@ void Animation::draw(Graphics &graphics, int x,int y){
         SDL_Rect sourceRect = this->animations[this->_currentAnimation][this->_frameIndex];
         graphics.blitSurface(this->_spriteSheet,&sourceRect,&destRect);
     }
-}
-
-void Animation::animationEnd(std::string currentAnimation){
-
-}
-
-void Animation::setupAnimations() {
-    this->addAnimation(3,0,0,"RUNNING_LEFT",16,16,Vector2(0,0));
 }

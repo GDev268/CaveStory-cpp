@@ -14,6 +14,7 @@ Graphics::~Graphics() {
 	SDL_DestroyRenderer(this->_renderer);
 }
 
+//Loads the desired image
 SDL_Surface* Graphics::loadImage(const std::string &filePath){
 	//Check if the image exists on the spritesheet hasmap
 	if(this->_spriteSheet.count(filePath) == 0){

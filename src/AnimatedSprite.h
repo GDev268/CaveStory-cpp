@@ -7,11 +7,11 @@
 #include "Graphics.h"
 #include "Global.h"
 
-class Animation : public Sprite {
+class AnimatedSprite : public Sprite {
 public:
-    Animation();
-    Animation(Graphics& graphics, const std::string &filePath, int sourceX, int sourceY,int width, int height, float posX,float posY,float timeToUpdate);
-    ~Animation();
+    AnimatedSprite();
+    AnimatedSprite(Graphics& graphics, const std::string &filePath, int sourceX, int sourceY,int width, int height, float posX,float posY,float timeToUpdate);
+    ~AnimatedSprite();
 
     //Plays the animation
     void playAnimation(std::string animation,bool once = false);
@@ -21,9 +21,6 @@ public:
 
     //Draws the sprite on the screen
     void draw(Graphics &graphics, int x,int y);
-
-    //Sets all the animations
-    virtual void setupAnimations();
 
 protected:
     double _timeToUpdate;
@@ -43,7 +40,10 @@ protected:
     void setVisible(bool visible);
 
     //Triggers when a animation ends
-    virtual void animationEnd(std::string currentAnimation);
+    virtual void animationEnd(std::string currentAnimation) = 0;
+
+    //Sets all the animations
+    virtual void setupAnimations() = 0;
 private:
     std::map<std::string,std::vector<SDL_Rect>> animations;
     std::map<std::string,Vector2> _offsets;

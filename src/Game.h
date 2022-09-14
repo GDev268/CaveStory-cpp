@@ -1,5 +1,5 @@
 #include <SDL.h>
-#include "Animation.h"
+#include "Player.h"
 #include "Graphics.h"
 
 
@@ -12,6 +12,6 @@ private:
     void draw(Graphics &graphics);
     void update(float elapsedTime);
     
-    Animation _player;
+    Player _player;
 };
 
