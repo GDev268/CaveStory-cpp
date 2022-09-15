@@ -33,10 +33,10 @@ void Level::draw(Graphics &graphics) {
 	SDL_Rect destRect;
 	for (int x = 0; x < this->_size.x / 64; x++) {
 		for (int y = 0; y < this->_size.y / 64; y++) {
-			destRect.x = x * 64;
-			destRect.y = y * 64;
-			destRect.w = 64;
-			destRect.h = 64;
+			destRect.x = x * 64 * Global::PLAYER_SIZE;
+			destRect.y = y * 64 * Global::PLAYER_SIZE;;
+			destRect.w = 64 * Global::PLAYER_SIZE;;
+			destRect.h = 64 * Global::PLAYER_SIZE;;
 			graphics.blitSurface(this->_backgroundTexture, &sourceRect, &destRect);
 		}
 	}
