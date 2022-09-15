@@ -1,6 +1,8 @@
+#pragma once
 #include <SDL.h>
 #include "Player.h"
 #include "Graphics.h"
+#include "Level.h"
 
 
 class Game{
@@ -13,5 +15,6 @@ private:
     void update(float elapsedTime);
     
     Player _player;
+    Level _level;
 };
 
